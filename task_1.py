@@ -1,3 +1,6 @@
+import random
+import time
+
 from queue import Queue
 
 queue = Queue()
@@ -24,9 +27,18 @@ def process_request():
     print(f"{request} - processed.")
 
 
+def auto_request():
+    try:
+        while True:
+            random.choice([generate_request, process_request])()
+            time.sleep(0.5)
+    except KeyboardInterrupt:
+        print("\nAutomatic generation and processing of requests is stopped.")
+
+
 def main():
     print(
-        f"\nCommands:\ngenerate{' '*20}| adds a new request to the queue\nprocess{' '*21}| processes the request\nexit{' '*24}| exit the program\n"
+        f"\nCommands:\nauto{' '*24}| starts automatic request generation and processing\ngenerate{' '*20}| adds a new request to the queue\nprocess{' '*21}| processes the request\nexit{' '*24}| exit the program\n"
     )
 
     while True:
@@ -34,6 +46,8 @@ def main():
 
         if command == "exit":
             break
+        elif command == "auto":
+            auto_request()
         elif command == "generate":
             generate_request()
         elif command == "process":

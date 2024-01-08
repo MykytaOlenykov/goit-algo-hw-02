@@ -5,7 +5,7 @@ def palindrome_check(word: str) -> bool:
     if len(word) <= 1:
         return False
 
-    d = deque(word.lower())
+    d = deque(word.lower().replace(" ", ""))
 
     while len(d) > 1:
         if d.pop() != d.popleft():
@@ -21,6 +21,7 @@ def main():
     print(palindrome_check("Aa"))
     print(palindrome_check("K"))
     print(palindrome_check(""))
+    print(palindrome_check(" д  і  д"))
 
 
 if __name__ == "__main__":
